@@ -360,6 +360,7 @@ for x = -200, 200 do
 	end
 end
 --]]
+--the code above correctly plots the burning ship fractal (in roblox)
 
 -- tests
 ---[[
@@ -678,7 +679,6 @@ print("ColoredCircles:", ColoredCircle.static.count) -- ColoredCircles: 2
 
 
 
---the code above correctly plots the burning ship fractal
 -- full console output
 --[[
   00:52:40.113  (-2 + 2i)  -  Server - lua classes, complex numbers:159
