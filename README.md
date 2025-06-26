@@ -1,4 +1,5 @@
 # lua-class-system
 a lightweight implementation of classes for lua. <br>
 the system itself is 60 loc, but i also include 800 loc of tests and examples in tests.lua. <br>
+theres also a full complex number class implemented in the tests (with their own tests ofc) and a fractal renderer that works in roblox (though the system itself works everywhere, its using just plain lua)<br>
 i hope that you'll enjoy my work :D
