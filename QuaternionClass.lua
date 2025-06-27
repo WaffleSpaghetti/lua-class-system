@@ -51,7 +51,7 @@ local getters = {
 	end,
 	conj = function(self) return Q(self.R, -self.I, -self.J, -self.K) end,
 	inverse = function(self)
-		local n2 = self.norm ^ 2
+		local n2 = self.abs ^ 2
 		if n2 == 0 then
 			error("Cannot invert a zero quaternion")
 		end
