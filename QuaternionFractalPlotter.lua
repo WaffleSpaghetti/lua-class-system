@@ -9,7 +9,7 @@ end
 local function F(z, c)
 	return Q(math.abs(z.R),math.abs(z.I),math.abs(z.J),math.abs(z.K))^2 + c -- burning ship fractal function, for mandelbrot use the commented out one
 end
-]]
+--]]
 
 local t=0
 local res = 0.1
