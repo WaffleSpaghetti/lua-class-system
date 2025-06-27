@@ -1,10 +1,14 @@
-local Class = require(game.ServerScriptService.ClassSystem)
-local Complex = require(game.ServerScriptService.ComplexClass)
-local C, R, I, toComplex, approxEq = Complex.getHelpers()
+--local Class = require(game.ServerScriptService.ClassSystem) --in this example the class module is an optional import
+local Complex = require(game.ServerScriptService.ComplexClass) -- path to the complex module
+local C, R, I, toComplex, approxEq = Complex.getHelpers() --unpack helpers from the wrapper
 
-
+--[[
+local function F(z,c)
+	return z^2 + c
+end
+--]]
 local function F(z, c)
-	return C(math.abs(z.R),math.abs(z.I))^2 + c
+	return C(math.abs(z.R),math.abs(z.I))^2 + c -- burning ship fractal function, for mandelbrot use the commented out one
 end
 local t=0
 for x = -200, 200 do
