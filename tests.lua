@@ -385,9 +385,26 @@ CCCO1:super("override", 3,4) --nothing to see here!
   21:28:51.060  nothing to see here!  -  Server - Script:170
 ]]
 
+
+
+
+
+
+
+
+---@!!! IMPORTANT INFO !!!---
+
 --CCCO1:super("super", "override", 3, 4) -- won't work, error: attempt to index nil with '__index' 
 --i couldnt find a solution which also kept this pretty syntax, so just dont chain supers
 --also, always use : and not . when calling methods, and never forget that the first arg should always be self when defining new methods
+
+
+
+
+
+
+
+
 
 --]]
 
