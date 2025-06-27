@@ -144,6 +144,6 @@ Quaternion.meta.__le = function(a,b)
 end
 Quaternion.meta.__type = "Quaternion"
 Quaternion.getHelpers = function()
-	return Q, R, I, toQuaternion, QfromAxisAngle
+	return Q, R, I, toQuaternion, QfromAxisAngle, qexp, qlog
 end
 return Quaternion
