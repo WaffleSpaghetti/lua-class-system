@@ -58,3 +58,4 @@ Class.outerMeta.__call = function(self, obj)
 end
 Class.innerMeta.__call = function(self, obj, base) return self:define(obj, base) end
 setmetatable(Class, Class.innerMeta)
+return Class
