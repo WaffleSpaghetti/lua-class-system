@@ -1,4 +1,4 @@
-local Class = require(game.ServerScriptService.ClassSystem) -- the path to the class module
+local Class = require(game.ServerScriptService.ClassSystem)
 local Complex = Class{
 	R = 0,
 	I = 0,
@@ -59,9 +59,18 @@ Complex.meta.__div = function(a,b)
 	a, b = toComplex(a), toComplex(b)
 	return C((a.R*b.R+a.I*b.I)/(b.R^2+b.I^2),(a.R*b.I-b.R*a.I)/(b.R^2+b.I^2))
 end
+local cexp = function(z)
+	local ea = math.exp(z.R)
+	return C(ea * math.cos(z.I), ea * math.sin(z.I))
+end
+local clog = function(z)
+	local modulus = math.sqrt(z.R^2 + z.I^2)
+	local angle = math.atan2(z.I, z.R)
+	return C(math.log(modulus), angle)
+end
 Complex.meta.__pow = function(a,b)
 	a, b = toComplex(a), toComplex(b)
-	return a.abs~=0 and C(a.abs^b.R*math.exp(-b.I*a.arg),b.R*a.arg+b.I*math.log(a.abs)).to_rect or C(0,0)
+	return a.abs ~= 0 and cexp(b * clog(a)) or 0
 end
 Complex.meta.__unm = function(a)
 	return a.isRect and C(-a.R, -a.I) or C(a.R, a.I+math.pi)
@@ -83,11 +92,7 @@ Complex.meta.__le = function(a,b)
 	return (a.abs <= b.abs)
 end
 Complex.meta.__type = "Complex"
-local function approxEq(a,b,epsilon)
-	epsilon = epsilon or 1e-10
-	return (a.R - b.R)^2 + (a.I - b.I)^2 < epsilon
-end
-Complex.getHelpers = function() --wrapper for helpers
-	return C, R, I, toComplex, approxEq
+Complex.getHelpers = function()
+	return C, R, I, toComplex
 end
 return Complex
