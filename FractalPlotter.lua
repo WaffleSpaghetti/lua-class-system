@@ -1,3 +1,4 @@
+--THIS ONLY WORKS IN ROBLOX, BUT YOU CAN DEFINITELY REWRITE THIS A LITTLE BIT TO PLOT STUFF WITH LÖVE2D OR OTHER LIBS
 --local Class = require(game.ServerScriptService.ClassSystem) --in this example the class module is an optional import
 local Complex = require(game.ServerScriptService.ComplexClass) -- path to the complex module
 local C, R, I, toComplex, approxEq = Complex.getHelpers() --unpack helpers from the wrapper
