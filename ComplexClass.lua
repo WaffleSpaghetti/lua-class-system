@@ -93,6 +93,6 @@ Complex.meta.__le = function(a,b)
 end
 Complex.meta.__type = "Complex"
 Complex.getHelpers = function()
-	return C, R, I, toComplex
+	return C, R, I, toComplex, cexp, clog
 end
 return Complex
