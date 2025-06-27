@@ -1,4 +1,4 @@
-local Class = require(game.ServerScriptService.ClassSystem)
+local Class = require(game.ServerScriptService.ClassSystem) -- the path to the class module
 local Complex = Class{
 	R = 0,
 	I = 0,
@@ -87,7 +87,7 @@ local function approxEq(a,b,epsilon)
 	epsilon = epsilon or 1e-10
 	return (a.R - b.R)^2 + (a.I - b.I)^2 < epsilon
 end
-Complex.getHelpers = function()
+Complex.getHelpers = function() --wrapper for helpers
 	return C, R, I, toComplex, approxEq
 end
 return Complex
