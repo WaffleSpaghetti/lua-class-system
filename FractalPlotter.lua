@@ -1,21 +1,22 @@
 --THIS ONLY WORKS IN ROBLOX, BUT YOU CAN DEFINITELY REWRITE THIS A LITTLE BIT TO PLOT STUFF WITH LÖVE2D OR OTHER LIBS
---local Class = require(game.ServerScriptService.ClassSystem) --in this example the class module is an optional import
-local Complex = require(game.ServerScriptService.ComplexClass) -- path to the complex module
-local C, R, I, toComplex, approxEq = Complex.getHelpers() --unpack helpers from the wrapper
-
+local Complex = require(game.ServerScriptService.ComplexClass)
+local C, R, I, toComplex, cexp, clog = Complex.getHelpers()
 --[[
 local function F(z,c)
 	return z^2 + c
 end
 --]]
+---[[
 local function F(z, c)
 	return C(math.abs(z.R),math.abs(z.I))^2 + c -- burning ship fractal function, for mandelbrot use the commented out one
 end
+--]]
 local t=0
-for x = -200, 200 do
-	for y = -200, 200 do
+local res = 0.05
+for x = -2, 2, res do
+	for y = -2, 2, res do
 		t = t + 1
-		local c = C(x / 100, y / 100)
+		local c = C(x, y)
 		local Z = C(0, 0)
 		local max = 100
 		for i = 0, 100 do
@@ -31,8 +32,8 @@ for x = -200, 200 do
 		end
 		local part = Instance.new("Part")
 		part.Anchored = true
-		part.Size = Vector3.one
-		part.Position = Vector3.new(x, 10, y)
+		part.Size = Vector3.one*res*10
+		part.Position = Vector3.new(x*10, 2, y*10)
 		local g = max / 100
 		part.Color = Color3.new(g, g, g)
 		part.Material = Enum.Material.SmoothPlastic
