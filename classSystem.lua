@@ -4,6 +4,7 @@ Class.innerMeta = {}
 Class.define = function(self, o, base)
 	assert(type(o) == "table", "Expected a table for prototype")
 	local parentProto = base and base.proto
+	local parentStatic = base and base.static
 	o = o or {}
 	local static = o.static
 	static = static or {}
@@ -17,6 +18,19 @@ Class.define = function(self, o, base)
 			else
 				error("super method '"..methodName.."' not found")
 			end
+		end,
+		superGetter = function(self, getterName)
+			local proto = getmetatable(self).__proto
+			local parentMeta = getmetatable(proto)
+			local parentProto = parentMeta and parentMeta.__index
+			if parentProto then
+				local parentGetters = parentProto.getters
+				local getter = parentGetters and parentGetters[getterName]
+				if getter then
+					return getter(self)
+				end
+			end
+			error("super getter '"..getterName.."' not found")
 		end
 	}
 	for k, v in pairs(o) do
@@ -24,8 +38,8 @@ Class.define = function(self, o, base)
 			proto[k] = v
 		end
 	end
-	if base and base.static and base.static.init and base.static.passInit then
-		static.init = base.static.init
+	if parentStatic and parentStatic.onInstance and parentStatic.passOnInstance then
+		static.onInstance = parentStatic.onInstance
 	end
 	local class = {
 		proto = setmetatable(proto, {__index = parentProto}),
@@ -42,13 +56,19 @@ Class.define = function(self, o, base)
 		return proto[key]
 	end
 	setmetatable(class, self.outerMeta)
+	if parentStatic and parentStatic.onSubclass then
+		class = parentStatic.onSubclass(base, class) or class
+	end
 	return class
 end
 Class.proto = {
 	new = function(self, obj)
 		obj = obj or {}
 		setmetatable(obj, self.meta)
-		obj = (self.static and self.static.init) and self.static.init(self, obj) or obj
+		local static = self.static
+		if static and static.onInstance then
+			obj = static.onInstance(self, obj) or obj
+		end
 		return obj
 	end,
 }
